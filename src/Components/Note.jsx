@@ -1,27 +1,33 @@
 import { useContext } from "react";
 import { NoteContext } from "../Context/NoteContext";
+import { ThemeContext } from "../Context/ThemeContext";
 
 const Note = ({text, date, id}) => {
     const { DeleteNote } = useContext(NoteContext);
+    const { theme } = useContext(ThemeContext);
 
     const getData = () => {
-        const Date = new Date(date);
-        return `${Date.getDate()}-${Date.getMonth()+1}-${Date.getFullYear()}`;
+        const noteDate  = new Date(date);
+        return `${noteDate .getDate()}-${noteDate .getMonth()+1}-${noteDate .getFullYear()}`;
     };
 
-    return(
-        <div className="bg-[#DCD7FB] p-3 rounded-xl relative shadow-sm w-full max-w-[300px] min-h-[120px] flex flex-col justify-between">
-            <div className="text-gray-800 mb-3 whitespace-pre-wrap">
-                {text}
+    return (
+        <div className={`${theme === "light" ? "bg-white" : "bg-[#292A2D]"} p-4 rounded-xl relative w-full max-w-[300px] min-h-[120px] flex flex-col justify-between overflow-visible transition-colors duration-300 hover:shadow-md`}>
+            <div className="mb-3 overflow-hidden">
+                <p className="whitespace-pre-wrap break-words overflow-y-auto max-h-[100px]">
+                    {text}
+                </p>
             </div>
 
             <div className="flex justify-between items-end text-sm text-gray-700">
-                <div className="">{getData()}</div>
-                    <button 
-                        className="bg-[#6168AD] text-white border mt-2 px-4 py-2 rounded-full hover:opacity-80" 
-                        onClick={() => DeleteNote(id)}>
-                        🗑️
-                    </button>
+                <div className={`font-medium ${theme === "light" ? "text-gray-700" : "text-white"}`}>{getData()}</div>
+                <button
+                    className={`${theme === "light" ? "bg-[#6168AD]" : "bg-[#7E76B5]"} text-white mt-2 w-10 h-10 rounded-full hover:opacity-80 transition-opacity`}
+                    onClick={() => DeleteNote(id)}
+                    aria-label="Delete note"
+                >
+                    <i className="fa-solid fa-trash"></i>
+                </button>
             </div>
         </div>
     );

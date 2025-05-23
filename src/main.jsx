@@ -8,10 +8,10 @@ import { NoteProvider } from "./Context/NoteContext.jsx";
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <NoteProvider>
-      <ThemeProvider>
+    <ThemeProvider>
+      <NoteProvider>
         <App />
-      </ThemeProvider>
-    </NoteProvider>
+      </NoteProvider>
+    </ThemeProvider>
   </StrictMode>
 );

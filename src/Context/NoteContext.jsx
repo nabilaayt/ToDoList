@@ -1,23 +1,10 @@
-import React, { createContext, useEffect, useState } from "react";
+import React, { createContext, useState } from "react";
 
 // Membuat Context
 export const NoteContext = createContext();
 
 export const NoteProvider = ({ children }) => {
     const [note, setNote] = useState([]);
-
-    useEffect(() => {
-        const fetchedData = fetchFromLocal();
-        if (fetchedData) {
-            setNote(fetchedData);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (note && note.length > 0) {
-            saveToLocal();
-        }
-    }, [note]);
 
     // Fungsi Tambah Catatan
     const AddNote = (newNote) => {
@@ -37,15 +24,6 @@ export const NoteProvider = ({ children }) => {
             return newListNote; // return array baru tanpa item yang dihapus
         });
     };
-
-    const saveToLocal = () => {
-        localStorage.setItem("notes", JSON.stringify(note));
-    }
-
-    const fetchFromLocal = () => {
-        return JSON.parse(localStorage.getItem("notes"));
-    }
-
 
     return <NoteContext.Provider value={{note, AddNote, DeleteNote}}>{children}</NoteContext.Provider>
 }
