@@ -6,6 +6,7 @@ const Note = ({text, date, id}) => {
     const { DeleteNote } = useContext(NoteContext);
     const { theme } = useContext(ThemeContext);
 
+    // Fungsi untuk mengubah timestamp menjadi format tanggal
     const getData = () => {
         const noteDate  = new Date(date);
         return `${noteDate .getDate()}-${noteDate .getMonth()+1}-${noteDate .getFullYear()}`;
@@ -20,9 +21,9 @@ const Note = ({text, date, id}) => {
             </div>
 
             <div className="flex justify-between items-end text-sm text-gray-700">
-                <div className={`font-medium ${theme === "light" ? "text-gray-700" : "text-white"}`}>{getData()}</div>
+                <div className={`${theme === "light" ? "text-gray-700" : "text-white"}`}>{getData()}</div>
                 <button
-                    className={`${theme === "light" ? "bg-[#6168AD]" : "bg-[#7E76B5]"} text-white mt-2 w-10 h-10 rounded-full hover:opacity-80 transition-opacity`}
+                    className={`${theme === "light" ? "bg-[#7E76B5]" : "bg-[#7E76B5]"} text-white mt-2 w-10 h-10 rounded-full hover:opacity-80 transition-opacity`}
                     onClick={() => DeleteNote(id)}
                     aria-label="Delete note"
                 >

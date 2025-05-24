@@ -12,14 +12,14 @@ function App() {
   const { note, AddNote } = useContext(NoteContext); // akses value dari NoteContext
   const [sidebarOpen, setSidebarOpen] = useState(false); // State untuk mobile sidebar
 
-  //
+  // Fungsi untuk merender/menampilkan semua note yg tersimpan dalam state note
   const renderNote = () => {
-    return note.map((noteItem, index) => (
+    return note.map((noteItem, index) => ( //mengubah array note jadi array komponen <Note/>
       <Note
-        key={`note-${index}-${noteItem.date}`}
-        text={noteItem.text}
-        date={noteItem.date}
-        id={index}
+        key={`note-${index}-${noteItem.date}`} // identifikasi perubahan item dgn key
+        text={noteItem.text} // kirim text note ke komponen note
+        date={noteItem.date} // kirim date note ke komponen note
+        id={index} // kirim id ke komponen note (berdasarkan urutan dalam array)
       />
     ));
   };
@@ -40,9 +40,9 @@ function App() {
       };
       
       AddNote(newCard);
-      setNewText("");
-      setShowCard(false);
-      setSidebarOpen(false);
+      setNewText(""); // Mengosongkan input text setelah menambahkan note baru
+      setShowCard(false); // Menutup card setelah menambahkan note baru
+      setSidebarOpen(false); // Menutup sidebar setelah menambahkan note baru
   
     } catch (error) {
       console.error("Error adding note:", error);
@@ -54,7 +54,7 @@ return (
 
       {/* Hamburger Button */}
       <button
-        className={`fixed top-4 left-4 z-50 md:hidden p-2 rounded-lg ${theme === "light" ? "bg-[#6168AD] text-white" : "bg-gray-600 text-white"}`}
+        className={`fixed top-4 left-4 z-50 md:hidden p-2 rounded-lg ${theme === "light" ? "bg-[#7E76B5] text-white" : "bg-[#7E76B5] text-white"}`}
         onClick={() => setSidebarOpen(!sidebarOpen)}
       >
         <i className={`fa-solid ${sidebarOpen ? 'fa-times' : 'fa-bars'} text-xl`}></i>
@@ -71,12 +71,12 @@ return (
       {/* Sidebar */}
       <div className={`fixed md:relative top-0 left-0 z-40 flex flex-col items-center pt-16 md:pt-10 h-screen w-64 md:w-1/5 lg:w-1/8 transform transition-transform duration-300 ease-in-out
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'} md:translate-x-0 ${theme === "light" ? "bg-white" : "bg-[#292A2D]"}`}>
-        <h1 className={`font-cinzel-decorative font-semibold text-2xl md:text-3xl mb-6 md:mb-10 px-4 text-center ${theme === "light" ? "text-[#6168AD]" : "text-white"}`}>
+        <h1 className={`font-cinzel-decorative font-semibold text-2xl md:text-3xl mb-6 md:mb-10 px-4 text-center ${theme === "light" ? "text-[#7E76B5]" : "text-white"}`}>
           Tolist
         </h1>
         
         <button 
-          className={`${theme === "light" ? "bg-[#6168AD]" : "bg-[#7E76B5]"} text-white rounded-full w-12 h-12 text-xl flex items-center justify-center hover:opacity-80 transition-opacity mb-4`} 
+          className={`${theme === "light" ? "bg-[#7E76B5]" : "bg-[#7E76B5]"} text-white rounded-full w-12 h-12 text-xl flex items-center justify-center hover:opacity-80 transition-opacity mb-4`} 
           onClick={() => setShowCard(!showCard)}
         >
           <i className="fa-solid fa-plus"></i>
@@ -84,18 +84,18 @@ return (
 
         {/* Add Note Card di Sidebar (untuk Mobile) */}
         {showCard && (
-          <div className={`block md:hidden mx-4 p-4 rounded-xl w-full max-w-[250px] shadow-sm ${theme === "light" ? "bg-[#efecfc]" : "bg-gray-600"}`}>
+          <div className={`block md:hidden mx-4 p-4 rounded-xl w-full max-w-[250px] ${theme === "light" ? "bg-[#efecfc]" : "bg-gray-600"}`}>
             <textarea 
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
-              className={`p-2 rounded-md w-full resize-none focus:outline-none border text-sm ${theme === "light" ? "border-gray-200 focus:border-[#6168AD]" : "border-gray-500 focus:border-gray-400"}`}
+              className={`p-2 rounded-md w-full resize-none focus:outline-none border text-sm ${theme === "light" ? "border-gray-200 focus:border-[#7E76B5]" : "border-gray-500 focus:border-gray-400"}`}
               rows={4}
               placeholder="Write your note"
             />
             <div className="flex gap-2 mt-2">
               <button
                 onClick={handleAddNote}
-                className={`${theme === "light" ? "bg-[#6168AD]" : "bg-gray-500"} text-white font-bold px-3 py-2 rounded-full hover:opacity-80 transition-opacity flex-1`}
+                className={`${theme === "light" ? "bg-[#7E76B5]" : "bg-gray-500"} text-white font-bold px-3 py-2 rounded-full hover:opacity-80 transition-opacity flex-1`}
               >
                 <i className="fa-solid fa-check"></i>
               </button>
@@ -121,11 +121,11 @@ return (
         
         {/* Add Note Card di Konten Utama (untuk Desktop) */}
         {showCard && (
-          <div className={`hidden md:block mb-6 p-4 rounded-xl w-full max-w-[300px] shadow-sm ${theme === "light" ? "bg-white" : "bg-[#292A2D]"}`}>
+          <div className={`hidden md:block mb-6 p-4 rounded-xl w-full max-w-[300px] ${theme === "light" ? "bg-white" : "bg-[#292A2D]"}`}>
             <textarea 
               value={newText}
               onChange={(e) => setNewText(e.target.value)}
-              className={`p-2 rounded-md w-full resize-none focus:outline-none border ${theme === "light" ? "border-gray-200 focus:border-[#6168AD]" : "border-gray-500 focus:border-gray-400"}`}
+              className={`p-2 rounded-md w-full resize-none focus:outline-none border ${theme === "light" ? "border-gray-200 focus:border-[#7E76B5]" : "border-gray-500 focus:border-gray-400"}`}
               cols={30}
               rows={5}
               placeholder="Write your note"
@@ -133,7 +133,7 @@ return (
             <div className="flex gap-2 mt-2">
               <button
                 onClick={handleAddNote}
-                className={`${theme === "light" ? "bg-[#6168AD]" : "bg-gray-500"} text-white font-bold w-10 h-10 rounded-full hover:opacity-80 transition-opacity`}
+                className={`${theme === "light" ? "bg-[#7E76B5]" : "bg-gray-500"} text-white font-bold w-10 h-10 rounded-full hover:opacity-80 transition-opacity`}
               >
                 <i className="fa-solid fa-check"></i>
               </button>
